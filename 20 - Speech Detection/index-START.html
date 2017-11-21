@@ -3,39 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <title>Speech Detection</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 <body>
 
   <div class="words" contenteditable>
   </div>
-  <!-- <button>Click me!</button> -->
-
+  <button>Get Copenhagen weather</button>
+  <!-- <h2>Hey</h2> -->
+  <h3>No city specified</h3>
+  
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   const recognition = new SpeechRecognition();
-  recognition.interimResults = true;
-
-  let p = document.createElement('p');
+  const btn = document.querySelector("button");
+  const h3 = document.querySelector("h3");
   const words = document.querySelector('.words');
+  let p = document.createElement('p');
+
   words.appendChild(p);
 
-  recognition.addEventListener('result', e => {
+  function getWeather(city){
+    if (city === 'CPH') city = 'Copenhagen'
+
+        $.getJSON(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=31a20c37cb371651aef061539f43b521`,function(json){
+          // Show the entire JSON response
+          // h2.innerText = (JSON.stringify(json));
+          h3.innerText = `The temperature is currently ${json.main.temp}° in ${json.name}. The minimum temperature is ${json.main.temp_min}°, and the maximum temperature is ${json.main.temp_max}°. The wind speed is ${json.wind.speed}m/s. The cloudiness is ${json.clouds.all}%. Enjoy your day!`;
+        });
+    }
+
+  // Take the speech and transform it into actual words
+  function speechToText(e) {
     const transcript = Array.from(e.results)
       .map(result => result[0])
       .map(result => result.transcript)
       .join('');
-
+      console.log(transcript);
       p.textContent = transcript;
+      // When finished with a segment, add it to a paragraph and append it on the page
       if (e.results[0].isFinal) {
         p = document.createElement('p');
         words.appendChild(p);
+        getWeather(transcript);
       }
     console.log(transcript);  
+  }  
+
+  recognition.interimResults = true;
+  btn.addEventListener('click', func => {
+    getWeather('Copenhagen'); //Default on button press
   });
-
+  recognition.addEventListener('result', speechToText);
   recognition.addEventListener('end', recognition.start);
-
   recognition.start();
 
 </script>
@@ -47,7 +68,7 @@
     }
 
     body {
-      background:#ffc600;
+      background:#36d1f8;
       font-family: 'helvetica neue';
       font-weight: 200;
       font-size: 20px;
