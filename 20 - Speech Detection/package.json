@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.12.5"
+  },
+  "dependencies": {
+    "weather.js": "^0.1.0"
   }
 }
