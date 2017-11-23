@@ -52,13 +52,13 @@ function getCphWeather() {
   words.appendChild(p);
 
   function getWeather(city){
-    // if (city === 'CPH') city = 'Copenhagen'
+    if (city === 'CPH') city = 'Copenhagen'
 
-    //     $.getJSON(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=31a20c37cb371651aef061539f43b521`,function(json){
-    //       // Show the entire JSON response
-    //       // h2.innerText = (JSON.stringify(json));
-    //       h3.innerText = `The temperature is currently ${json.main.temp}° in ${json.name}. The minimum temperature is ${json.main.temp_min}°, and the maximum temperature is ${json.main.temp_max}°. The wind speed is ${json.wind.speed}m/s. The cloudiness is ${json.clouds.all}%. Enjoy your day!`;
-    //     });
+        $.getJSON(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=31a20c37cb371651aef061539f43b521`,function(json){
+          // Show the entire JSON response
+          // h2.innerText = (JSON.stringify(json));
+          h3.innerText = `The temperature is currently ${json.main.temp}° in ${json.name}. The minimum temperature is ${json.main.temp_min}°, and the maximum temperature is ${json.main.temp_max}°. The wind speed is ${json.wind.speed}m/s. The cloudiness is ${json.clouds.all}%. Enjoy your day!`;
+        });
     }
 
   // Take the speech and transform it into actual words
