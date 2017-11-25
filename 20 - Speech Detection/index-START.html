@@ -11,9 +11,21 @@
 </head>
 <body>
 <div class="mainContainer">
-  <input type="text" class="input" placeholder="Type a city here" />
-  <div class="words" contenteditable>
+  <input type="text" class="input" placeholder="Type a city here"  />
+  <div class="words">
   </div>
+  <div>
+  <input type="checkbox" id="temp" checked>
+  <label for="temp">Temperature</label>
+  <input type="checkbox" id="windspeed" checked>
+  <label for="windspeed">Windspeed</label>
+  <input type="checkbox" id="clouds" checked>
+  <label for="clouds">Clouds</label>
+</div>
+<!-- <div>
+  <button>Check all</button>
+  <button>Uncheck all</button>
+</div> -->
   <div class="displayInfo"> <h3>No city specified</h3></div>
   <!-- <h2>Hey</h2> -->
   <div class="myBtns">  
@@ -47,8 +59,8 @@ function getCphWeather() {
   const btn = document.querySelector("button");
   const h3 = document.querySelector("h3");
   const words = document.querySelector('.words');
+  const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
   let p = document.createElement('p');
-
   words.appendChild(p);
 
   function getWeather(city){
@@ -57,8 +69,39 @@ function getCphWeather() {
         $.getJSON(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=31a20c37cb371651aef061539f43b521`,function(json){
           // Show the entire JSON response
           // h2.innerText = (JSON.stringify(json));
-          h3.innerText = `The temperature is currently ${json.main.temp}° in ${json.name}. The minimum temperature is ${json.main.temp_min}°, and the maximum temperature is ${json.main.temp_max}°. The wind speed is ${json.wind.speed}m/s. The cloudiness is ${json.clouds.all}%. Enjoy your day!`;
+          let city = json.name;
+          let curTemp = json.main.temp;
+          let minTemp = json.main.temp_min;
+          let maxTemp = json.main.temp_max;
+          let windSpeed = json.main.temp_max;
+          let cloudPer = json.clouds.all;
+
+          let tempText = `The temperature is currently ${curTemp}° in ${city}. The minimum temperature is ${minTemp}°, and the maximum temperature is ${maxTemp}°. ` 
+          let windText = `The wind speed is ${windSpeed}m/s. `
+          let cloudText = `The cloudiness is ${cloudPer}%. `
+          let enjoyText = "Enjoy your day!"
+
+          // go through each checkbox manually and if it is checked, append the appropriate text. TODO: think of better way to do this
+          let finalText = '';
+          if (checkBoxes[0].checked) {
+            finalText += tempText;
+          }
+
+          if (checkBoxes[1].checked) {
+            finalText += windText;
+          }
+
+          if (checkBoxes[2].checked) {
+            finalText += cloudText;
+          }
+
+          finalText += enjoyText;
+
+        // set the h3 element to the final text
+        h3.innerText = `${finalText}`
+
         });
+        
     }
 
   // Take the speech and transform it into actual words

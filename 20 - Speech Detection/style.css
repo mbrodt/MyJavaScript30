@@ -33,6 +33,7 @@
   }
 
   .displayInfo {
+    min-height: 80px;
     background: rgba(255, 255, 255, 0.6);
     border-radius:30px;
     box-shadow:10px 10px 0 rgba(0,0,0,0.1);
@@ -58,12 +59,12 @@
   }
 
   button {
-    background-color:#35ca42;
+  background-color:#35ca42;
 	padding:10px;
 	font-family: 'Open Sans', sans-serif;
 	font-size:14px;
 	color:#fff;
-	border: solid 1px #359467;
+	border: solid 1px #578b72;
 
   }
 
