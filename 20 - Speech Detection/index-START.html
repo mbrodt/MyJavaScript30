@@ -7,12 +7,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <!-- <script async type="text/javascript" src="background.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/bubbly-bg@0.2.3/dist/bubbly-bg.js"></script>
-  <script type="text/javascript" src="myScript.js"></script>
 </head>
 <body>
 <div class="mainContainer">
-  <input type="text" class="input" placeholder="Type a city here"  />
-  <div class="words">
+  <input type="text" class="input" placeholder="Type a city here" autofocus  />
+  <div class="speechOutput">
   </div>
   <div>
   <input type="checkbox" id="temp" checked>
@@ -34,107 +33,7 @@
   </div>
 </div>
 
-  
-<script>
-  bubbly({
-    animate: true, // default is true
-    blur: 1, // default is 4
-    bubbleFunc: () => `hsla(${Math.random() * 360}, 100%, 50%, ${Math.random() * 0.25})`, // default is () => `hsla(0, 0%, 100%, ${r() * 0.1})`)
-    bubbles: 10, // default is Math.floor((canvas.width + canvas.height) * 0.02);
-    canvas: document.querySelector("#background"), // default is created and attached
-    colorStart: "#00F260", // default is blue-ish
-    colorStop: "#0575E6",// default is blue-ish
-    compose: "lighter", // default is "lighter"
-    shadowColor: "#fff", // default is #fff
-});
-
-
-function getCphWeather() {
-  getWeather("Copenhagen");
-}
-
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const input = document.querySelector('.input')
-  const recognition = new SpeechRecognition();
-  const btn = document.querySelector("button");
-  const h3 = document.querySelector("h3");
-  const words = document.querySelector('.words');
-  const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
-  let p = document.createElement('p');
-  words.appendChild(p);
-
-  function getWeather(city){
-    if (city === 'CPH') city = 'Copenhagen'
-
-        $.getJSON(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=31a20c37cb371651aef061539f43b521`,function(json){
-          // Show the entire JSON response
-          // h2.innerText = (JSON.stringify(json));
-          let city = json.name;
-          let curTemp = json.main.temp;
-          let minTemp = json.main.temp_min;
-          let maxTemp = json.main.temp_max;
-          let windSpeed = json.main.temp_max;
-          let cloudPer = json.clouds.all;
-
-          let tempText = `The temperature is currently ${curTemp}° in ${city}. The minimum temperature is ${minTemp}°, and the maximum temperature is ${maxTemp}°. ` 
-          let windText = `The wind speed is ${windSpeed}m/s. `
-          let cloudText = `The cloudiness is ${cloudPer}%. `
-          let enjoyText = "Enjoy your day!"
-
-          // go through each checkbox manually and if it is checked, append the appropriate text. TODO: think of better way to do this
-          let finalText = '';
-          if (checkBoxes[0].checked) {
-            finalText += tempText;
-          }
-
-          if (checkBoxes[1].checked) {
-            finalText += windText;
-          }
-
-          if (checkBoxes[2].checked) {
-            finalText += cloudText;
-          }
-
-          finalText += enjoyText;
-
-        // set the h3 element to the final text
-        h3.innerText = `${finalText}`
-
-        });
-        
-    }
-
-  // Take the speech and transform it into actual words
-  function speechToText(e) {
-    const transcript = Array.from(e.results)
-      .map(result => result[0])
-      .map(result => result.transcript)
-      .join('');
-      console.log(transcript);
-      p.textContent = transcript;
-      // When finished with a segment, add it to a paragraph and append it on the page
-      if (e.results[0].isFinal) {
-        // p = document.createElement('p');
-        words.appendChild(p);
-        getWeather(transcript);
-      }
-    console.log(transcript);  
-  }  
-
-  recognition.interimResults = true;
-
-  btn.addEventListener('click', () => {
-    let city = input.value;
-    console.log(city);
-    getWeather(city); 
-    input.value = '';
-  });
-
-  recognition.addEventListener('result', speechToText);
-  recognition.addEventListener('end', recognition.start);
-  recognition.start();
-
-</script>
+<script type="text/javascript" src="myscript.js"></script>
 
 </body>
 </html>

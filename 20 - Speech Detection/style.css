@@ -13,7 +13,7 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 0;
+    margin-top: 50px;
     margin-bottom: 0;
     max-width: 500px;
     display: grid;
@@ -22,14 +22,19 @@
     grid-gap: 20px;
     justify-items: stretch;
   }
+
+  ::placeholder { 
+    color: rgb(83, 83, 83);
+ }
   
   .input {
     position: relative;
-    background:white;
+    background:rgba(255, 255, 255, 0.2);
     border-radius:5px;
     box-shadow:10px 10px 0 rgba(0,0,0,0.1);
     padding:1rem 1rem 1rem 1rem;
     font-size: 20px;
+    border: none;
   }
 
   .displayInfo {
@@ -43,8 +48,8 @@
     line-height:3rem;
   }
 
-  .words {
-    background:white;
+  .speechOutput {
+    background:rgb(206, 206, 206);
     border-radius:5px;
     box-shadow:10px 10px 0 rgba(0,0,0,0.1);
     padding:1rem 1rem 1rem 1rem;
@@ -62,9 +67,11 @@
   background-color:#35ca42;
 	padding:10px;
 	font-family: 'Open Sans', sans-serif;
-	font-size:14px;
-	color:#fff;
-	border: solid 1px #578b72;
+  font-size:14px;
+  font-weight: bold;
+	color:rgb(20, 20, 20);
+  border: solid 1px #578b72;
+  border-radius: 5px;
 
   }
 
