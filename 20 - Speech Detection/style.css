@@ -64,15 +64,22 @@
   }
 
   button {
-  background-color:#35ca42;
+  /* background-color:#35ca42; */
+  background-color:#44d2b6;
 	padding:10px;
 	font-family: 'Open Sans', sans-serif;
   font-size:14px;
   font-weight: bold;
 	color:rgb(20, 20, 20);
-  border: solid 1px #578b72;
+  border: solid 1px #00799a;
   border-radius: 5px;
 
+  }
+
+  button:hover {
+    color: #00799a;
+    transform: translateY(-1px);
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
   }
 
   
