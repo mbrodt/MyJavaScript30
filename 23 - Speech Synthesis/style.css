@@ -53,7 +53,6 @@ h1 {
 }
 
 .voiceinator input,
-.voiceinator button,
 .voiceinator select,
 .voiceinator textarea {
   width: 100%;
@@ -66,6 +65,7 @@ h1 {
   outline:0;
 }
 
+
 textarea {
   height: 20rem;
 }
@@ -76,21 +76,18 @@ input[type="select"] {
 
 .voiceinator button {
   background:#ffc600;
-  border:0;
-  width: 49%;
-  float:left;
   font-family: 'Pacifico', cursive;
-  margin-bottom: 0;
   font-size: 2rem;
   border-bottom: 5px solid #F3C010;
   cursor:pointer;
-  position: relative;
+}
+
+#buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
 }
 
 .voiceinator button:active {
   top:2px;
-}
-
-.voiceinator button:nth-of-type(1) {
-  margin-right: 2%;
 }
